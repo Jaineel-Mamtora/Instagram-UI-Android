@@ -30,6 +30,12 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
+    body2 = TextStyle(
+        color = Black,
+        fontFamily = inter,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    ),
     h1 = TextStyle(
         color = Black,
         fontFamily = billabong,
