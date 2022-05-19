@@ -4,11 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -20,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.trailblazing.instagramui.Post
 import com.trailblazing.instagramui.R
 import com.trailblazing.instagramui.StoryItem
@@ -29,6 +32,37 @@ import com.trailblazing.instagramui.ui.theme.inter
 
 @Composable
 fun HomeScreen() {
+    val posts: List<Post> = listOf(
+        Post(
+            username = "iambilly",
+            likes = "248",
+            postDate = "16th May, 2022",
+            iconId = R.drawable.dp_image,
+            imageId = R.drawable.skateboarding_man,
+        ),
+        Post(
+            username = "angel_doll",
+            likes = "509",
+            postDate = "12th May, 2022",
+            iconId = R.drawable.dp_image3,
+            imageId = R.drawable.deer_image,
+        ),
+        Post(
+            username = "butterscotch",
+            likes = "364",
+            postDate = "6th May, 2022",
+            iconId = R.drawable.dp_image5,
+            imageId = R.drawable.sunrise_image,
+        ),
+        Post(
+            username = "foxy",
+            likes = "655",
+            postDate = "2nd May, 2022",
+            iconId = R.drawable.dp_image7,
+            imageId = R.drawable.fantasy_space,
+        ),
+    )
+
     Scaffold(
         modifier = Modifier
             .background(White)
@@ -50,7 +84,7 @@ fun HomeScreen() {
                 actions = {
                     Box(
                         modifier = Modifier
-                            .width(120.dp)
+                            .width(110.dp)
                             .height(26.dp)
                     ) {
                         Row(
@@ -62,66 +96,66 @@ fun HomeScreen() {
                                 painter = painterResource(id = R.drawable.ic_add),
                                 contentDescription = "Add Content",
                                 tint = Black,
-                                modifier = Modifier.size(26.dp)
+                                modifier = Modifier.size(30.dp)
                             )
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_messenger),
                                 contentDescription = "Send Message",
                                 tint = Black,
-                                modifier = Modifier.size(26.dp)
+                                modifier = Modifier.size(30.dp)
                             )
                         }
                     }
                 },
-                elevation = 0.dp,
+                elevation = 1.dp,
             )
         }
     ) {
-        Column() {
-            StoriesSection(
-                stories = listOf(
-                    StoryItem(
-                        userName = "user1",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user2",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user3",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user4",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user5",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user6",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user7",
-                        iconId = R.drawable.dp_image
-                    ),
-                    StoryItem(
-                        userName = "user8",
-                        iconId = R.drawable.dp_image
-                    ),
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            item {
+                StoriesSection(
+                    stories = listOf(
+                        StoryItem(
+                            userName = "Your Story",
+                            iconId = R.drawable.dp_image
+                        ),
+                        StoryItem(
+                            userName = "ablative",
+                            iconId = R.drawable.dp_image2
+                        ),
+                        StoryItem(
+                            userName = "angel_doll",
+                            iconId = R.drawable.dp_image3
+                        ),
+                        StoryItem(
+                            userName = "born2pizza",
+                            iconId = R.drawable.dp_image4
+                        ),
+                        StoryItem(
+                            userName = "butterscotch",
+                            iconId = R.drawable.dp_image5
+                        ),
+                        StoryItem(
+                            userName = "dawnofdusk",
+                            iconId = R.drawable.dp_image6
+                        ),
+                        StoryItem(
+                            userName = "foxy",
+                            iconId = R.drawable.dp_image7
+                        ),
+                        StoryItem(
+                            userName = "hakunamatata",
+                            iconId = R.drawable.dp_image8
+                        ),
+                    )
                 )
-            )
-            Divider(thickness = 0.5.dp)
-            PostSection(
-                post = Post(
-                    username = "iambilly",
-                    iconId = R.drawable.dp_image,
-                    imageId = R.drawable.sunrise_image,
-                )
-            )
+                Divider(thickness = 0.5.dp)
+            }
+            items(posts.size) {
+                PostSection(post = posts[it])
+            }
         }
     }
 }
@@ -149,7 +183,7 @@ fun PostSection(
     post: Post
 ) {
     Spacer(modifier = Modifier.height(10.dp))
-    Column() {
+    Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -164,7 +198,7 @@ fun PostSection(
                     modifier = Modifier
                         .border(1.dp, Color.Red, CircleShape)
                         .border(3.dp, Color.White, CircleShape)
-                        .size(35.dp)
+                        .size(40.dp)
                 ) {
                     Image(
                         painter = painterResource(id = post.iconId),
@@ -214,9 +248,8 @@ fun PostSection(
                     tint = Black,
                     modifier = Modifier
                         .size(26.dp),
-
                 )
-                Spacer(modifier = Modifier.width(25.dp))
+                Spacer(modifier = Modifier.width(20.dp))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_chat),
                     contentDescription = "Comment",
@@ -224,7 +257,7 @@ fun PostSection(
                     modifier = Modifier
                         .size(28.dp),
                 )
-                Spacer(modifier = Modifier.width(25.dp))
+                Spacer(modifier = Modifier.width(20.dp))
                 Icon(
                     painter = painterResource(id = R.drawable.ic_send),
                     contentDescription = "Send",
@@ -239,6 +272,33 @@ fun PostSection(
                 modifier = Modifier.size(26.dp)
             )
         }
+        Text(
+            "${post.likes} likes",
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                fontFamily = inter
+            ),
+            modifier = Modifier.padding(start = 15.dp)
+        )
+        Text(
+            "${post.username} ❤💯",
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontFamily = inter,
+                fontSize = 13.sp,
+            ),
+            modifier = Modifier.padding(start = 15.dp)
+        )
+        Text(
+            "Posted on: ${post.postDate}",
+            style = TextStyle(
+                fontFamily = inter,
+                fontSize = 10.sp,
+                color = Color.Gray,
+            ),
+            modifier = Modifier.padding(start = 15.dp, top = 5.dp, bottom = 10.dp)
+        )
     }
 }
 
@@ -248,11 +308,12 @@ fun StoryCard(
     size: Dp
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = CenterHorizontally,
+        modifier = Modifier.width(size)
     ) {
         Box(
             modifier = Modifier
-                .border(1.dp, Color.Red, CircleShape)
+                .border(2.dp, Color.Red, CircleShape)
                 .border(5.dp, Color.White, CircleShape)
                 .size(size)
         ) {
@@ -267,7 +328,6 @@ fun StoryCard(
         }
         Box(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(top = 3.dp)
         ) {
             Text(
@@ -275,8 +335,9 @@ fun StoryCard(
                 text = storyItem.userName,
                 style = MaterialTheme.typography.body2,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+                overflow = TextOverflow.Ellipsis,
+
+                )
         }
     }
 }
