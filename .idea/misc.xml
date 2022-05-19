@@ -4,13 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_add.xml" value="0.249" />
+        <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_bookmark.xml" value="0.249" />
+        <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_chat.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_heart.xml" value="0.249" />
+        <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_heart1.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_home.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_insta_reel.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_launcher_background.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_messenger.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_profile.xml" value="0.249" />
         <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_search.xml" value="0.249" />
+        <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_send.xml" value="0.249" />
+        <entry key="..\:/Users/Jaineel/AndroidStudioProjects/InstagramUI/app/src/main/res/drawable/ic_three_dots_vertical.xml" value="0.249" />
       </map>
     </option>
   </component>

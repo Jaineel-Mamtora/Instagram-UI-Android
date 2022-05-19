@@ -14,13 +14,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.trailblazing.instagramui.Post
 import com.trailblazing.instagramui.R
 import com.trailblazing.instagramui.StoryItem
 import com.trailblazing.instagramui.ui.theme.Black
 import com.trailblazing.instagramui.ui.theme.White
+import com.trailblazing.instagramui.ui.theme.inter
 
 @Composable
 fun HomeScreen() {
@@ -72,10 +77,7 @@ fun HomeScreen() {
             )
         }
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-        ) {
+        Column() {
             StoriesSection(
                 stories = listOf(
                     StoryItem(
@@ -112,6 +114,14 @@ fun HomeScreen() {
                     ),
                 )
             )
+            Divider(thickness = 0.5.dp)
+            PostSection(
+                post = Post(
+                    username = "iambilly",
+                    iconId = R.drawable.dp_image,
+                    imageId = R.drawable.sunrise_image,
+                )
+            )
         }
     }
 }
@@ -122,22 +132,42 @@ fun StoriesSection(
 ) {
     LazyRow(
         modifier = Modifier
-            .height(100.dp)
-            .padding(top = 10.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+            .absolutePadding(top = 10.dp)
+            .height(105.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(horizontal = 10.dp)
     ) {
         items(stories.size) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
+            StoryCard(storyItem = stories[it], 75.dp)
+        }
+    }
+}
+
+@Composable
+fun PostSection(
+    post: Post
+) {
+    Spacer(modifier = Modifier.height(10.dp))
+    Column() {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .absolutePadding(left = 10.dp, right = 15.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
                     modifier = Modifier
                         .border(1.dp, Color.Red, CircleShape)
-                        .border(5.dp, Color.White, CircleShape)
-                        .size(75.dp)
+                        .border(3.dp, Color.White, CircleShape)
+                        .size(35.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = stories[it].iconId),
+                        painter = painterResource(id = post.iconId),
                         contentDescription = "display picture",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -145,20 +175,108 @@ fun StoriesSection(
                             .clip(CircleShape)
                     )
                 }
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 3.dp)
-                ) {
-                    Text(
-                        textAlign = TextAlign.Center,
-                        text = stories[it].userName,
-                        style = MaterialTheme.typography.body2,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    post.username,
+                    style = TextStyle(fontWeight = FontWeight.Bold, fontFamily = inter)
+                )
             }
+            Icon(
+                painter = painterResource(id = R.drawable.ic_three_dots_vertical),
+                contentDescription = "Add Content",
+                tint = Black,
+                modifier = Modifier.size(15.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Divider(thickness = 0.5.dp)
+        Image(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(380.dp),
+            painter = painterResource(id = post.imageId),
+            contentDescription = "Post photo",
+            contentScale = ContentScale.Crop,
+        )
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_heart),
+                    contentDescription = "Like",
+                    tint = Black,
+                    modifier = Modifier
+                        .size(26.dp),
+
+                )
+                Spacer(modifier = Modifier.width(25.dp))
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_chat),
+                    contentDescription = "Comment",
+                    tint = Black,
+                    modifier = Modifier
+                        .size(28.dp),
+                )
+                Spacer(modifier = Modifier.width(25.dp))
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_send),
+                    contentDescription = "Send",
+                    tint = Black,
+                    modifier = Modifier.size(26.dp)
+                )
+            }
+            Icon(
+                painter = painterResource(id = R.drawable.ic_bookmark),
+                contentDescription = "Bookmark",
+                tint = Black,
+                modifier = Modifier.size(26.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun StoryCard(
+    storyItem: StoryItem,
+    size: Dp
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(
+            modifier = Modifier
+                .border(1.dp, Color.Red, CircleShape)
+                .border(5.dp, Color.White, CircleShape)
+                .size(size)
+        ) {
+            Image(
+                painter = painterResource(id = storyItem.iconId),
+                contentDescription = "display picture",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(CircleShape)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 3.dp)
+        ) {
+            Text(
+                textAlign = TextAlign.Center,
+                text = storyItem.userName,
+                style = MaterialTheme.typography.body2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
